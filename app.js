@@ -8,36 +8,13 @@ const bodyParser = require("body-parser")
 const PORT = process.env.PORT  || 3050;
 const app = express();
 
+app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-const conn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database:"game_test"
-});
-
-//Ruta get
-app.get("/", (req, res) => {
-    User.create({
-        name: "test",
-        password: "test",
-        gold: 100
-    }).then(user => {
-        res.json(user);
-    });
-});
-
-app.post("/crearusuario",(req,res) =>{
-    res.send(req.body)
-});
+app.use("/api", require("./Routes/UserRoutes"))
+app.use("/ingemon", require("./Routes/IngemonRoutes"))
 
 //revisar conexion
-conn.connect(error => {
-    if (error) throw error;
-    console.log("Conexion establecida");
-});
-
 app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`)
 
