@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use("/api", require("./Routes/UserRoutes"))
+app.use("/ingemon", require("./Routes/UserRoutes"))
 app.use("/ingemon", require("./Routes/IngemonRoutes"))
 
 //revisar conexion
